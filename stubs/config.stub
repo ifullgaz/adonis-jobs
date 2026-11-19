@@ -1,0 +1,14 @@
+{{{
+  exports({ to: app.configPath('jobs.ts') })
+}}}
+import { defineConfig } from '@ifullgaz/adonis-jobs'
+import env from '#start/env'
+// import { bus } from '@ifullgaz/adonis-jobs/transports/bus'
+
+export default defineConfig({
+  bus: {
+//    factory: bus()
+    enabled: env.get('JOB_QUEUE_BUS_ENABLED', false),
+    channel: env.get('JOB_QUEUE_BUS_CHANNEL', 'job-queue:process')
+  }
+})
